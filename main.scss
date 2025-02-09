@@ -1,0 +1,140 @@
+// Variables
+$primary-color: #2563eb;
+$secondary-color: #1e40af;
+$background-color: #f8fafc;
+$text-color: #1e293b;
+$success-color: #22c55e;
+$danger-color: #ef4444;
+$border-radius: 8px;
+$box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+// Dark mode variables
+:root {
+  --background-color: #{$background-color};
+  --text-color: #{$text-color};
+  --card-background: #ffffff;
+}
+
+.dark {
+  --background-color: #1a1a1a;
+  --text-color: #ffffff;
+  --card-background: #2d2d2d;
+}
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin card {
+  background: var(--card-background);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+// Global styles
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: $border-radius;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  &-primary {
+    background-color: $primary-color;
+    color: white;
+    
+    &:hover {
+      background-color: $secondary-color;
+    }
+
+    &:focus {
+      outline: none;
+      ring: 2px;
+      ring-offset: 2px;
+      ring-color: $primary-color;
+    }
+  }
+  
+  &-danger {
+    background-color: $danger-color;
+    color: white;
+    
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.card {
+  @include card;
+  margin-bottom: 1rem;
+}
+
+.currency-ticker {
+  background: $primary-color;
+  color: white;
+  padding: 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  
+  &__content {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+    padding-right: 100%;
+  }
+}
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+// Form styles
+input, select {
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 2px rgba($primary-color, 0.2);
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+// Accessibility
+:focus {
+  outline: 2px solid $primary-color;
+  outline-offset: 2px;
+}
+
+// Animation
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
